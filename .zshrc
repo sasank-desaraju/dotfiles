@@ -26,6 +26,7 @@ ZSH_THEME="random"
 # "kolo"
 # "wedisagree"
 # "mikeh"
+# "clean"
 # )
 
 # Uncomment the following line to use case-sensitive completion.
@@ -93,7 +94,7 @@ plugins=(
     # vi-mode       # I'm suing the custom zsh-vi-mode so I might ignore this
     web-search      # allows for web search by "ddg how to bake a cake" etc.
     zoxide
-    zsh-vi-mode # custom
+    zsh-vi-mode # custom; this might be messing up tmux
 )
 
 # Start Tmux automatically
@@ -101,6 +102,7 @@ ZSH_TMUX_AUTOSTART="true"
 ZSH_TMUX_AUTOSTART_ONCE="true"
 
 source $ZSH/oh-my-zsh.sh
+tmux source ~/.config/tmux/tmux.conf
 
 # User configuration
 
