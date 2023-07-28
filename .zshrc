@@ -27,6 +27,7 @@ ZSH_THEME="random"
 # "wedisagree"
 # "mikeh"
 # "clean"
+# "pygmalion"
 # )
 
 # Uncomment the following line to use case-sensitive completion.
