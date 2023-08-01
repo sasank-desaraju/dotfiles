@@ -28,6 +28,9 @@ ZSH_THEME="random"
 # "mikeh"
 # "clean"
 # "pygmalion"
+# "gnzh"
+# "agnoster"
+# "amresh"  # this is that custom Indian one
 # )
 
 # Uncomment the following line to use case-sensitive completion.
