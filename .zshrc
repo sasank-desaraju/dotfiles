@@ -160,9 +160,6 @@ unset __conda_setup
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias op='xdg-open'
-# neofetch
-neofetch --ascii_colors 129 254
-# --ascii_distro Ubuntu_small       # to make the distro the small version. Might implement later...
 
 # alias nvim to nv
 alias nv="~/Applications/nvim.appimage"
@@ -192,6 +189,10 @@ alias sag="sudo apt upgrade"
 alias ls="exa"
 alias ll="exa -l"
 alias la="exa -la"
+
+# Neofetch
+neofetch --ascii_colors 129 254
+# --ascii_distro Ubuntu_small       # to make the distro the small version. Might implement later...
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
