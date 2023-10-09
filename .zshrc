@@ -108,7 +108,7 @@ plugins=(
     tmux      # Wait until I start using tmux. Might conflict with tmux customizations or with NVChad, if I use it.
     # vi-mode       # I'm suing the custom zsh-vi-mode so I might ignore this
     web-search      # allows for web search by "ddg how to bake a cake" etc.
-    z
+    # z             # For zoxide, but is giving some problems and doesn't seem necessary
     zoxide
     zsh-vi-mode # custom; this might be messing up tmux
 )
