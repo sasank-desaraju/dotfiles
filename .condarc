@@ -1,0 +1,6 @@
+ssl_verify: true
+channels:
+  - conda-forge
+  - anaconda
+  - defaults
+solver: classic
