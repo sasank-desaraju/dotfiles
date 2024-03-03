@@ -12,7 +12,7 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 
 # Add Doom to the PATH
-export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$HOME/.config/emacs/bin/:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
