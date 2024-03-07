@@ -18,3 +18,7 @@ TODO: config the neofetch from the proper config file instead of just fixing com
 
 I got some real jank thing going with the tmux stows.
 Also, I don't have npm on my laptop so CoPilot is screwed.
+
+3/5/24:
+In order to use tmux-yank, which allows copying to OS clipboard from tmux, I need to install xsel apparently.
+That is not working.

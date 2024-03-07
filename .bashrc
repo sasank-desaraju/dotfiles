@@ -171,4 +171,5 @@ alias sag="sudo apt upgrade"
 # Adding NVIDIA CUDA Toolkit to PATH
 # export PATH=/usr/local/cuda-11.5/bin${PATH:+:${PATH}}
 
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

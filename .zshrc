@@ -194,11 +194,15 @@ alias ll="exa -l"
 alias lt="exa -lasnew"
 alias la="exa -la"
 
+# Source .zshrc and .bashrc easily
+alias zsource="source ~/.zshrc"
+#alias bsource="source ~/.bashrc"
+
 # Run tmux
 tmux
 
 # Neofetch
-alias neofetch="neofetch --ascii_colors 129 254 --colors 129 254 30 60 90 150 --ascii_distro Ubuntu_small"
+# alias neofetch="neofetch --ascii_colors 129 254 --colors 129 254 30 60 90 150 --ascii_distro Ubuntu_small"
 neofetch
 # --ascii_distro Ubuntu_small       # to make the distro the small version. Might implement later...
 
