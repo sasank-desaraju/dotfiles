@@ -22,3 +22,6 @@ Also, I don't have npm on my laptop so CoPilot is screwed.
 3/5/24:
 In order to use tmux-yank, which allows copying to OS clipboard from tmux, I need to install xsel apparently.
 That is not working.
+
+3/7/24:
+I should include my .ssh/config. I should start with my desktop config since that one has some more options re port forwarding.
