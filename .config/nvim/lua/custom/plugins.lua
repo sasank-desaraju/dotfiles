@@ -31,37 +31,46 @@ local plugins = {
     lazy = true,
   },
   ]]
-
   {
-    "zbirenbaum/copilot.lua",
-    lazy = true,
-    cmd = "Copilot",
-    event = "InsertEnter",
+    "github/copilot.vim",
+    lazy = false,
     config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false},
-        panel = { enabled = false},
-      })
+      require("copilot").setup()
     end,
   },
-  {
-    "zbirenbaum/copilot-cmp",
-    dependencies = "copilot.lua",
-    opts = {},
-    config = function ()
-      local copilot_cmp = require("copilot_cmp")
-      copilot_cmp.setup(opts)
-      -- copilot_cmp._on_insert_enter()
-    end,
-  },
+
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   lazy = true,
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("copilot").setup({
+  --       suggestion = { enabled = false},
+  --       panel = { enabled = false},
+  --     })
+  --   end,
+  -- },
+
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   dependencies = "copilot.lua",
+  --   opts = {},
+  --   config = function ()
+  --     local copilot_cmp = require("copilot_cmp")
+  --     copilot_cmp.setup(opts)
+  --     -- copilot_cmp._on_insert_enter()
+  --   end,
+  -- },
 
   -- cmp
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       {
-        "zbirenbaum/copilot.lua",
-        "zbirenbaum/copilot-cmp",
+        -- "zbirenbaum/copilot.lua",
+        -- "zbirenbaum/copilot-cmp",
+        "github/copilot.vim"
       },
     },
     opts = function()
