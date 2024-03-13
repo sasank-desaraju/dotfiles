@@ -13,6 +13,14 @@ local plugins = {
     build = function() vim.fn["mkdp#util#install"]() end,
   },
 
+  {
+	"L3MON4D3/LuaSnip",
+	-- follow latest release.
+	version = "v2.2.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+	-- install jsregexp (optional!).
+	build = "make install_jsregexp"
+  },
+
   -- Copilot
   --[[
   {
@@ -78,7 +86,7 @@ local plugins = {
       conf.sources = {
         {name = "copilot", group_index = 2},
         { name = "nvim_lsp", group_index = 2 },
-        { name = "luasnip", group_index = 2 },
+        -- { name = "luasnip", group_index = 2 },
         { name = "buffer", group_index = 2 },
         { name = "nvim_lua", group_index = 2 },
         { name = "path", group_index = 2 },
