@@ -442,9 +442,10 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'christoomey/vim-tmux-navigator' #!important
 set -g @plugin 'tmux-plugins/tmux-yank'
 
+# Session X by omerxx
 set -g @plugin 'omerxx/tmux-sessionx'
 set -g @sessionx-bind 'o'   # man, this is not working. I can run it by calling the sessionx.sh script directly but not from the shortcut.
-set -g @sessionx-x-path '~/dotfiles/'
+# set -g @sessionx-x-path '~/dotfiles/'
 set -g @sessionx-zoxide-mode 'on'
 
 # Themes

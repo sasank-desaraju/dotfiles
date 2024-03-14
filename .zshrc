@@ -115,11 +115,11 @@ plugins=(
 
 # Start Tmux automatically
 ZSH_TMUX_AUTOSTART="false"
-ZSH_TMUX_AUTOSTART_ONCE="true"
+ZSH_TMUX_AUTOSTART_ONCE="false"
 
 source $ZSH/oh-my-zsh.sh
 # Should I keep the below line?
-tmux source ~/.config/tmux/tmux.conf
+#tmux source ~/.config/tmux/tmux.conf
 
 # User configuration
 
@@ -195,7 +195,7 @@ alias lt="exa -lasnew"
 alias la="exa -la"
 
 # Source .zshrc and .bashrc easily
-alias zsource="source ~/.zshrc"
+alias zsrc="source ~/.zshrc"
 #alias bsource="source ~/.bashrc"
 
 # Run tmux
