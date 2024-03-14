@@ -449,14 +449,14 @@ set -g @sessionx-bind 'o'   # man, this is not working. I can run it by calling 
 set -g @sessionx-zoxide-mode 'on'
 
 # Themes
-#set -g @plugin 'dreamsofcode-io/catppuccin-tmux'
+set -g @plugin 'dreamsofcode-io/catppuccin-tmux'
 #set -g @catppuccin_flavour 'mocha'
 # set -g @plugin 'fabioluciano/tmux-tokyo-night'
 # set -g @theme_variation 'storm'
 # set -g @plugin 'jimeh/tmux-themepack'
 # set -g @themepack 'powerline/double/orange'
 # set -g @plugin 'nordtheme/tmux'
-set -g @plugin 'fabioluciano/tmux-tokyo-night'
+# set -g @plugin 'fabioluciano/tmux-tokyo-night'
 
 
 # -- custom variables ----------------------------------------------------------
