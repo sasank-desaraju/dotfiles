@@ -388,6 +388,8 @@ unbind C-l  #!important
 # Windows
 bind n next-window
 bind p previous-window
+unbind Tab
+bind Space last-window
 
 # Shift Alt vim keys to switch windows
 bind -n M-H previous-window

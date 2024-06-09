@@ -114,7 +114,7 @@ plugins=(
 )
 
 # Start Tmux automatically
-ZSH_TMUX_AUTOSTART="false"
+ZSH_TMUX_AUTOSTART="true"
 ZSH_TMUX_AUTOSTART_ONCE="false"
 
 source $ZSH/oh-my-zsh.sh
@@ -187,19 +187,29 @@ alias sfhp="sftp sasank.desaraju@hpg.rc.ufl.edu"
 alias sad="sudo apt update"
 # Alias apt upgrade
 alias sag="sudo apt upgrade"
+alias sai="sudo apt install"
+# Same but for nala, which is a pretty alternative to apt commands
+alias sni="sudo nala install"
+alias snd="sudo nala update"
+alias sng="sudo nala upgrade"
 
 # Alias ls to use exa instead of normal ls
 alias ls="exa"
 alias ll="exa -l"
 alias lt="exa -lasnew"
 alias la="exa -la"
+alias zz="z .."
 
 # Source .zshrc and .bashrc easily
 alias zsrc="source ~/.zshrc"
 #alias bsource="source ~/.bashrc"
 
+# Add Slicer to PATH
+#export PATH="$HOME/Applications/Slicer-5.6.1-linux-amd64/Slicer:$PATH"
+export PATH="$HOME/Applications/Slicer-5.6.1-linux-amd64:$PATH"
+
 # Run tmux
-tmux
+# tmux
 
 # Neofetch
 # alias neofetch="neofetch --ascii_colors 129 254 --colors 129 254 30 60 90 150 --ascii_distro Ubuntu_small"
@@ -213,3 +223,12 @@ export PATH="/home/sasank/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 # fzf line
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/sasank/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<

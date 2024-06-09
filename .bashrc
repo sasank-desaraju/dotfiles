@@ -173,3 +173,18 @@ alias sag="sudo apt upgrade"
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/home/sasank/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/home/sasank/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<
