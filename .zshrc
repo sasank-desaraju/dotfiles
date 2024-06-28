@@ -111,6 +111,7 @@ plugins=(
     # z             # For zoxide, but is giving some problems and doesn't seem necessary
     zoxide
     zsh-vi-mode # custom; this might be messing up tmux
+    zsh-autosuggestions
 )
 
 # Start Tmux automatically
@@ -187,6 +188,8 @@ alias sfhp="sftp sasank.desaraju@hpg.rc.ufl.edu"
 alias sad="sudo apt update"
 # Alias apt upgrade
 alias sag="sudo apt upgrade"
+alias sai="sudo apt install"
+alias sni="sudo nala install"
 
 # Alias ls to use exa instead of normal ls
 alias ls="exa"
