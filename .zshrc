@@ -11,8 +11,6 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Add Doom to the PATH
-export PATH="$HOME/.config/emacs/bin:$PATH"
 
 # Trying to get tmux copy (tmux-yank) to work
 export DISPLAY=:0
@@ -140,12 +138,7 @@ fi
 # Enable Vi mode in zsh
 bindkey -v
 
-alias nv="/home/sasank/Applications/nvim.appimage"
-alias nvim="/home/sasank/Applications/nvim.appimage"
-
-# Alias Emacs
-alias emacs="emacsclient -c -a 'emacs'"
-
+# I don't really use these any more in favor of `ssh hpg` with a custom config
 # Alias ssh-ing into HiPerGator
 alias sshp="ssh sasank.desaraju@hpg.rc.ufl.edu"
 # Alias sftp-ing into HiPerGator
@@ -160,61 +153,18 @@ alias snd="sudo nala update"
 alias sng="sudo nala upgrade"
 alias sni="sudo nala install"
 
+# Alias ls to use exa instead of normal ls
 alias ls="exa"
 alias ll="exa -l"
-alias lt="exa -lsnew"
-alias la="exa -a"
-
-alias zsrc="source ~/.zshrc"
+alias lt="exa -lasnew"
+alias la="exa -la"
+alias zz="z .."
 
 alias open="xdg-open"
 
 eval "$(zoxide init zsh)"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# fzf line
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# >>> juliaup initialize >>>
-
-# !! Contents within this block are managed by juliaup !!
-
-path=('/home/sasank/.juliaup/bin' $path)
-export PATH
-
-# <<< juliaup initialize <<<
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/sasank/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/sasank/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/sasank/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/sasank/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias op='xdg-open'
-
-# alias nvim to nv
-alias nv="~/Applications/nvim.appimage"
-alias nvim="~/Applications/nvim.appimage"
 
 # alias the shapeworks studio command to shapworks
 alias shapeworks="/home/sasank/ShapeWorks-v6.3.0-linux/bin/ShapeWorksStudio"
@@ -223,8 +173,16 @@ alias shapeworks="/home/sasank/ShapeWorks-v6.3.0-linux/bin/ShapeWorksStudio"
 export PATH="/usr/local/texlive/2022/bin/x86_64-linux:$PATH"
 export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
 
+# *** EMACS
+# Add Doom to the PATH
+export PATH="$HOME/.config/emacs/bin:$PATH"
 # Alias Emacs
 alias emacs="emacsclient -c -a 'emacs'"
+
+# *** VIM/NEOVIM
+# alias nvim to nv
+alias nv="~/Applications/nvim.appimage"
+alias nvim="~/Applications/nvim.appimage"
 
 # Alias LazyVim
 alias lvim="NVIM_APPNAME=LazyNvim nvim"
@@ -234,28 +192,6 @@ alias avim="NVIM_APPNAME=AstroNvim nvim"
 
 # Alias Jannik Buhr's Quarto Kickstart NeoVim; it's not just Quarto but I'll just refer to it as such
 alias qvim="NVIM_APPNAME=QuartoNvim nvim"
-
-# Alias ssh-ing into HiPerGator
-alias sshp="ssh sasank.desaraju@hpg.rc.ufl.edu"
-# Alias sftp-ing into HiPerGator
-alias sfhp="sftp sasank.desaraju@hpg.rc.ufl.edu"
-
-# Alias apt update
-alias sad="sudo apt update"
-# Alias apt upgrade
-alias sag="sudo apt upgrade"
-alias sai="sudo apt install"
-# Same but for nala, which is a pretty alternative to apt commands
-alias sni="sudo nala install"
-alias snd="sudo nala update"
-alias sng="sudo nala upgrade"
-
-# Alias ls to use exa instead of normal ls
-alias ls="exa"
-alias ll="exa -l"
-alias lt="exa -lasnew"
-alias la="exa -la"
-alias zz="z .."
 
 # Source .zshrc and .bashrc easily
 alias zsrc="source ~/.zshrc"
@@ -273,10 +209,28 @@ export PATH="$HOME/Applications/Slicer-5.6.1-linux-amd64:$PATH"
 neofetch
 # --ascii_distro Ubuntu_small       # to make the distro the small version. Might implement later...
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Add Mojo/Modular to PATH
 export MODULAR_HOME="/home/sasank/.modular"
 export PATH="/home/sasank/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/sasank/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/sasank/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/sasank/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/sasank/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# p10k source
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # fzf line
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
