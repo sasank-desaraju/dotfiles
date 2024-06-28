@@ -201,7 +201,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-<<<<<<< HEAD
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -290,5 +289,3 @@ path=('/home/sasank/.juliaup/bin' $path)
 export PATH
 
 # <<< juliaup initialize <<<
-=======
->>>>>>> 8b0d1e8dd3d9cef9d5ba4bf4d9789cb70325e656
