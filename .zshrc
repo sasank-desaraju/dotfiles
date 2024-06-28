@@ -16,12 +16,10 @@ export PATH="$HOME/.config/emacs/bin:$PATH"
 
 # Trying to get tmux copy (tmux-yank) to work
 export DISPLAY=:0
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="random"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
@@ -29,22 +27,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# ZSH_THEME_RANDOM_CANDIDATES=(
-# "philips"
-# "xiong-chiamiov"
-# "zfowler" # maybe...
-# "smt"
-# "kolo"
-# "wedisagree"
-# "mikeh"
-# "clean"
-# "pygmalion"
-# "gnzh"
-# "agnoster"
-# "amresh"  # this is that custom Indian one
-# "zsh2000" # custom powerline-looking theme
-# "headline"
-# )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -95,9 +77,6 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Enable Vi mode in zsh
-bindkey -v
-
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -114,6 +93,7 @@ plugins=(
     # z             # For zoxide, but is giving some problems and doesn't seem necessary
     zoxide
     zsh-vi-mode # custom; this might be messing up tmux
+    zsh-autosuggestions
 )
 
 # Start Tmux automatically
@@ -132,15 +112,80 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nvim'
 else
   export EDITOR='vim'
 fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-#
+# Enable Vi mode in zsh
+bindkey -v
+
+alias nv="/home/sasank/Applications/nvim.appimage"
+alias nvim="/home/sasank/Applications/nvim.appimage"
+
+# Alias Emacs
+alias emacs="emacsclient -c -a 'emacs'"
+
+# Alias ssh-ing into HiPerGator
+alias sshp="ssh sasank.desaraju@hpg.rc.ufl.edu"
+# Alias sftp-ing into HiPerGator
+alias sfhp="sftp sasank.desaraju@hpg.rc.ufl.edu"
+
+# Apt aliases
+alias sad="sudo apt update"
+alias sag="sudo apt upgrade"
+alias sai="sudo apt install"
+# Using nala instead of apt
+alias snd="sudo nala update"
+alias sng="sudo nala upgrade"
+alias sni="sudo nala install"
+
+alias ls="exa"
+alias ll="exa -l"
+alias lt="exa -lsnew"
+alias la="exa -a"
+
+alias zsrc="source ~/.zshrc"
+
+alias open="xdg-open"
+
+eval "$(zoxide init zsh)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# fzf line
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/sasank/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/sasank/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -156,6 +201,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+<<<<<<< HEAD
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -244,3 +290,5 @@ path=('/home/sasank/.juliaup/bin' $path)
 export PATH
 
 # <<< juliaup initialize <<<
+=======
+>>>>>>> 8b0d1e8dd3d9cef9d5ba4bf4d9789cb70325e656
