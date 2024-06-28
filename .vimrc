@@ -3,14 +3,14 @@ if has("syntax")
     syntax on
 endif
 "set background=dark " Can I play with this?
-syntax enable
+"syntax enable
 "colorscheme tokyonight
-colorscheme molokai
+"colorscheme molokai
 au BufReadPost * if line("'\"") > 1 && line("'\"") <- line("$") | exe "normal! g'\"" | endif    " Apparently this jumps back to the last position when reopenning a file; apparently isn't really working
 filetype on
 filetype plugin on
 filetype indent on
-let python_hightlight_all = 1
+"let python_highlight_all = 1
 set number
 set cursorline
 set cursorcolumn

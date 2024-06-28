@@ -14,6 +14,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # Add Doom to the PATH
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
+# Trying to get tmux copy (tmux-yank) to work
+export DISPLAY=:0
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -177,6 +180,15 @@ export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
 
 # Alias Emacs
 alias emacs="emacsclient -c -a 'emacs'"
+
+# Alias LazyVim
+alias lvim="NVIM_APPNAME=LazyNvim nvim"
+
+# Alias AstroVim
+alias avim="NVIM_APPNAME=AstroNvim nvim"
+
+# Alias Jannik Buhr's Quarto Kickstart NeoVim; it's not just Quarto but I'll just refer to it as such
+alias qvim="NVIM_APPNAME=QuartoNvim nvim"
 
 # Alias ssh-ing into HiPerGator
 alias sshp="ssh sasank.desaraju@hpg.rc.ufl.edu"
