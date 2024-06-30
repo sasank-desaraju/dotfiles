@@ -65,7 +65,7 @@ tmux_conf_24b_colour=auto
 #   - tmux_conf_theme_mouse
 #   - tmux_conf_theme_root
 #   - tmux_conf_theme_synchronized
-tmux_conf_theme=enabled
+tmux_conf_theme=false
 
 # default theme
 tmux_conf_theme_colour_1="#080808"    # dark gray
@@ -115,7 +115,7 @@ tmux_conf_theme_window_bg="default"
 tmux_conf_theme_highlight_focused_pane=false
 
 # focused pane colours:
-tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
+tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_7"
 
 # pane border style, possible values are:
 #   - thin (default)
@@ -153,6 +153,7 @@ tmux_conf_theme_status_fg="$tmux_conf_theme_colour_3"
 tmux_conf_theme_status_bg="$tmux_conf_theme_colour_1"
 tmux_conf_theme_status_attr="none"
 
+# TODO: What is this
 # terminal title
 #   - built-in variables are:
 #     - #{circled_window_index}
@@ -346,7 +347,7 @@ tmux_conf_theme_clock_style="24"
 #   - disabled
 # on macOS, this requires installing reattach-to-user-namespace, see README.md
 # on Linux, this requires xsel, xclip or wl-copy
-tmux_conf_copy_to_os_clipboard=false
+tmux_conf_copy_to_os_clipboard=true
 
 
 # -- user customizations -------------------------------------------------------
@@ -369,6 +370,7 @@ unbind C-a
 unbind-key C-a
 unbind C-b
 
+# Set Tmux prefix to Ctrl-Space
 set-option -g prefix C-Space
 bind C-Space send-prefix
 
@@ -443,21 +445,26 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'christoomey/vim-tmux-navigator' #!important
 set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @yank_selection 'clipboard'
+set -g @yank_selection_mouse 'clipboard'
+# set -s copy-command 'xsel -i'
+# set -s set-clipboard off
 
 set -g @plugin 'omerxx/tmux-sessionx'
+unbind o
 set -g @sessionx-bind 'o'   # man, this is not working. I can run it by calling the sessionx.sh script directly but not from the shortcut.
 set -g @sessionx-x-path '~/dotfiles/'
 set -g @sessionx-zoxide-mode 'on'
 
 # Themes
-#set -g @plugin 'dreamsofcode-io/catppuccin-tmux'
-#set -g @catppuccin_flavour 'mocha'
+set -g @plugin 'dreamsofcode-io/catppuccin-tmux'
+set -g @catppuccin_flavour 'mocha'
 # set -g @plugin 'fabioluciano/tmux-tokyo-night'
 # set -g @theme_variation 'storm'
 # set -g @plugin 'jimeh/tmux-themepack'
 # set -g @themepack 'powerline/double/orange'
 # set -g @plugin 'nordtheme/tmux'
-set -g @plugin 'fabioluciano/tmux-tokyo-night'
+# set -g @plugin 'fabioluciano/tmux-tokyo-night'
 
 
 # -- custom variables ----------------------------------------------------------
