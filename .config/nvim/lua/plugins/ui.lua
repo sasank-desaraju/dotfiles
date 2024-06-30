@@ -120,6 +120,12 @@ return {
     opts = { signs = false },
   },
 
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+
   { -- edit the file system as a buffer
     "stevearc/oil.nvim",
     opts = {
@@ -197,9 +203,9 @@ return {
 
   { -- filetree
     "nvim-tree/nvim-tree.lua",
-    enabled = true,
+    enabled = false,
     keys = {
-      { "<c-b>", ":NvimTreeToggle<cr>", desc = "toggle nvim-tree" },
+      { "<leader>n", ":NvimTreeToggle<cr>", desc = "toggle nvim-tree" },
     },
     config = function()
       require("nvim-tree").setup({
@@ -221,8 +227,9 @@ return {
 
   -- or a different filetree
   {
+    -- INFO: Okay, this is nice >:)
     "nvim-neo-tree/neo-tree.nvim",
-    enabled = false,
+    enabled = true,
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -231,8 +238,20 @@ return {
     },
     cmd = "Neotree",
     keys = {
-      { "<c-b>", ":Neotree toggle<cr>", desc = "toggle nvim-tree" },
+      { "<leader>n", ":Neotree toggle<cr>", desc = "Toggle neo-tree" },
+      -- { "<C-p>", "scroll_preview", config = { direction = 10 } },
+      -- { "<C-n>", "scroll_preview", config = { direction = -10 } },
     },
+    config = function()
+      require("neo-tree").setup({
+        window = {
+          mappings = {
+            ["<C-j>"] = { "scroll_preview", config = { direction = -10 } },
+            ["<C-k>"] = { "scroll_preview", config = { direction = 10 } },
+          },
+        },
+      })
+    end,
   },
 
   -- show keybinding help window
@@ -269,11 +288,13 @@ return {
     end,
   },
 
-  { -- terminal
+  { -- floating terminal
     "akinsho/toggleterm.nvim",
     opts = {
       open_mapping = [[<c-\>]],
       direction = "float",
+      size = 10,
+      shade_terminals = true,
     },
   },
 
