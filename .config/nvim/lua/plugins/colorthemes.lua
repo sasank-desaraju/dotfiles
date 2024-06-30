@@ -1,55 +1,55 @@
 return {
-  { 'shaunsingh/nord.nvim', enabled = false, lazy = false, priority = 1000 },
-  { 'folke/tokyonight.nvim', enabled = false, lazy = false, priority = 1000 },
-  { 'EdenEast/nightfox.nvim', enabled = false, lazy = false, priority = 1000 },
+  { "shaunsingh/nord.nvim", enabled = false, lazy = false, priority = 1000 },
+  { "folke/tokyonight.nvim", enabled = false, lazy = false, priority = 1000 },
+  { "EdenEast/nightfox.nvim", enabled = false, lazy = false, priority = 1000 },
   {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    enabled = false,
+    "catppuccin/nvim",
+    name = "catppuccin",
+    enabled = true,
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- set colorscheme and overwrite highlights
-      vim.cmd.colorscheme 'catppuccin-mocha'
-      local colors = require 'catppuccin.palettes.mocha'
-      vim.api.nvim_set_hl(0, 'Tabline', { fg = colors.green, bg = colors.mantle })
-      vim.api.nvim_set_hl(0, 'TermCursor', { fg = '#A6E3A1', bg = '#A6E3A1' })
+      vim.cmd.colorscheme("catppuccin-mocha")
+      local colors = require("catppuccin.palettes.mocha")
+      vim.api.nvim_set_hl(0, "Tabline", { fg = colors.green, bg = colors.mantle })
+      vim.api.nvim_set_hl(0, "TermCursor", { fg = "#A6E3A1", bg = "#A6E3A1" })
     end,
   },
 
   {
-    'oxfist/night-owl.nvim',
+    "oxfist/night-owl.nvim",
     enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
       -- load the colorscheme here
-      require('night-owl').setup()
-      vim.cmd.colorscheme 'night-owl'
-      vim.api.nvim_set_hl(0, 'TermCursor', { fg = '#A6E3A1', bg = '#A6E3A1' })
+      require("night-owl").setup()
+      vim.cmd.colorscheme("night-owl")
+      vim.api.nvim_set_hl(0, "TermCursor", { fg = "#A6E3A1", bg = "#A6E3A1" })
     end,
   },
 
   {
-    'rebelot/kanagawa.nvim',
-    enabled = true,
+    "rebelot/kanagawa.nvim",
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'kanagawa'
-      vim.api.nvim_set_hl(0, 'TermCursor', { fg = '#A6E3A1', bg = '#A6E3A1' })
+      vim.cmd.colorscheme("kanagawa")
+      vim.api.nvim_set_hl(0, "TermCursor", { fg = "#A6E3A1", bg = "#A6E3A1" })
     end,
   },
 
   {
-    'olimorris/onedarkpro.nvim',
+    "olimorris/onedarkpro.nvim",
     enabled = false,
     lazy = false,
     priority = 1000,
   },
 
   {
-    'neanias/everforest-nvim',
+    "neanias/everforest-nvim",
     enabled = false,
     lazy = false,
     priority = 1000,
@@ -57,10 +57,10 @@ return {
 
   -- color html colors
   {
-    'NvChad/nvim-colorizer.lua',
+    "NvChad/nvim-colorizer.lua",
     enabled = true,
     opts = {
-      filetypes = { '*' },
+      filetypes = { "*" },
       user_default_options = {
         RGB = true, -- #RGB hex codes
         RRGGBB = true, -- #RRGGBB hex codes
@@ -72,13 +72,13 @@ return {
         css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
         css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
         -- Available modes for `mode`: foreground, background,  virtualtext
-        mode = 'background', -- Set the display mode.
+        mode = "background", -- Set the display mode.
         -- Available methods are false / true / "normal" / "lsp" / "both"
         -- True is same as normal
         tailwind = false, -- Enable tailwind colors
         -- parsers can contain values used in |user_default_options|
-        sass = { enable = false, parsers = { 'css' } }, -- Enable sass colors
-        virtualtext = '■',
+        sass = { enable = false, parsers = { "css" } }, -- Enable sass colors
+        virtualtext = "■",
         -- update color values even if buffer is not focused
         -- example use: cmp_menu, cmp_docs
         always_update = false,

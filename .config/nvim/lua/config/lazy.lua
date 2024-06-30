@@ -13,15 +13,16 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
+-- actually load Lazy
 require("lazy").setup("plugins", {
   defaults = {
     version = false,
   },
-  -- TODO: What is this
-  -- dev = {
-  --   path = '~/projects',
-  --   fallback = true,
-  -- },
+  -- TODO: What is this. Maybe it'll be useful...
+  dev = {
+    path = "~/projects",
+    fallback = true,
+  },
   install = {
     missing = true,
     colorscheme = { "default" },
