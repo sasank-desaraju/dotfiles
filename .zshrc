@@ -13,7 +13,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 
 # Trying to get tmux copy (tmux-yank) to work
-export DISPLAY=:0
+# export DISPLAY=:0
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -85,8 +85,9 @@ plugins=(
     git
     # git-extras    # check out sometime might be cool
     # taskwarrior   # I should also look into Taskwarrior lol
-    tmux      # Wait until I start using tmux. Might conflict with tmux customizations or with NVChad, if I use it.
-    # vi-mode       # I'm suing the custom zsh-vi-mode so I might ignore this
+    # WARNING: DO NOT USE THE TMUX ZSH PLUGIN. It prevents being able to copy from Nvim through Tmux. Caused me so much pain...
+    # tmux      # Wait until I start using tmux. Might conflict with tmux customizations or with NVChad, if I use it.
+    # vi-mode       # I'm using the custom zsh-vi-mode so I might ignore this
     web-search      # allows for web search by "ddg how to bake a cake" etc.
     # z             # For zoxide, but is giving some problems and doesn't seem necessary
     zoxide
@@ -95,8 +96,8 @@ plugins=(
 )
 
 # Start Tmux automatically
-ZSH_TMUX_AUTOSTART="true"
-ZSH_TMUX_AUTOSTART_ONCE="false"
+# ZSH_TMUX_AUTOSTART="true"
+# ZSH_TMUX_AUTOSTART_ONCE="true"
 
 source $ZSH/oh-my-zsh.sh
 # Should I keep the below line?
@@ -193,6 +194,9 @@ alias avim="NVIM_APPNAME=AstroNvim nvim"
 # Alias Jannik Buhr's Quarto Kickstart NeoVim; it's not just Quarto but I'll just refer to it as such
 alias qvim="NVIM_APPNAME=QuartoNvim nvim"
 
+# Alias NVChad's starter repo (which is apparently what users are actually supposed to use)
+alias cvim="NVIM_APPNAME=NVChad nvim"
+
 # Source .zshrc and .bashrc easily
 alias zsrc="source ~/.zshrc"
 #alias bsource="source ~/.bashrc"
@@ -202,11 +206,13 @@ alias zsrc="source ~/.zshrc"
 export PATH="$HOME/Applications/Slicer-5.6.1-linux-amd64:$PATH"
 
 # Run tmux
-# tmux
+# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#   exec tmux
+# fi
 
 # Neofetch
 # alias neofetch="neofetch --ascii_colors 129 254 --colors 129 254 30 60 90 150 --ascii_distro Ubuntu_small"
-neofetch
+# neofetch
 # --ascii_distro Ubuntu_small       # to make the distro the small version. Might implement later...
 
 # Add Mojo/Modular to PATH
@@ -243,3 +249,7 @@ path=('/home/sasank/.juliaup/bin' $path)
 export PATH
 
 # <<< juliaup initialize <<<
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
