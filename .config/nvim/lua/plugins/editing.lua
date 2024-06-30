@@ -15,11 +15,30 @@ return {
     -- respects TS, so it works in quarto documents 'numToStr/Comment.nvim',
     'numToStr/Comment.nvim',
     version = nil,
-    cond = function()
-      return vim.fn.has 'nvim-0.10' == 0
-    end,
     branch = 'master',
     config = true,
+
+    -- from NVChad init.lua
+    keys = {
+      { 'gcc', mode = 'n', desc = 'Comment toggle current line' },
+      { 'gc', mode = { 'n', 'o' }, desc = 'Comment toggle linewise' },
+      { 'gc', mode = 'x', desc = 'Comment toggle linewise (visual)' },
+      { 'gbc', mode = 'n', desc = 'Comment toggle current block' },
+      { 'gb', mode = { 'n', 'o' }, desc = 'Comment toggle blockwise' },
+      { 'gb', mode = 'x', desc = 'Comment toggle blockwise (visual)' },
+      {
+        '<leader>/',
+        "<ESC><cmd>lua require('Comment.api').toggle.linewise()<CR>",
+        mode = 'n',
+        desc = 'Comment toggle current line',
+      },
+      {
+        '<leader>/',
+        "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+        mode = 'v',
+        desc = 'Comment toggle linewise',
+      },
+    },
   },
 
   { -- format things as tables
