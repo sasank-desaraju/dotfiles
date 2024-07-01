@@ -3,10 +3,12 @@ return {
   -- a nice seletion UI also to find and open files
   {
     "nvim-telescope/telescope.nvim",
+    -- lazy = false,   -- set lazy to false for telescope-cmdline
     dependencies = {
       { "nvim-telescope/telescope-ui-select.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope-dap.nvim" },
+      -- { "jonarrien/telescope-cmdline.nvim" },
       {
         "jmbuhr/telescope-zotero.nvim",
         enabled = true,
@@ -19,6 +21,9 @@ return {
         end,
       },
     },
+    -- keys = {
+    --   { ":", "<cmd>Telescope cmdline<cr>", mode = "n", desc = "Cmdline" },
+    -- },
     -- INFO: What does this do?
     config = function()
       local telescope = require("telescope")
@@ -110,6 +115,7 @@ return {
       telescope.load_extension("ui-select")
       telescope.load_extension("dap")
       telescope.load_extension("zotero")
+      -- telescope.load_extension("cmdline")
     end,
   },
 
