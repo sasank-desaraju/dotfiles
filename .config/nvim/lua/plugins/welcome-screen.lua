@@ -219,7 +219,7 @@ return {
         fortune_list = {
           { 'We suffer more in imagination than in reality.', '', '- Seneca' },
           { 'So smile would ya? While we still got something to smile about.', '', '- Sargeant AJ Johnson' },
-          { 'Learn the rules like a pro, so you can break them like an artist.', '', '- Pabo Picasso' },
+          { 'Learn the rules like a pro, so you can break them like an artist.', '', '- Pablo Picasso' },
           { 'By always thinking unto them.', '', ' - Isaac Newton' },
           { 'We who cut mere stones must always be envisioning cathedrals.', '', "- Medieval quarry workers' creed" },
           -- { 'You otter be proud of yourself!', '', '— 🦦' },
