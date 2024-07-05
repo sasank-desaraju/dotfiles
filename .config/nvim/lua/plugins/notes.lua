@@ -21,36 +21,63 @@ return {
 
   {
     'epwalsh/obsidian.nvim',
-    enabled = false,
+    enabled = true,
+    lazy = false,
     ft = 'markdown',
     event = {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-      'BufReadPre ' .. vim.fn.expand '~/notes/**/*.md',
-      'BufNewFile ' .. vim.fn.expand '~/notes/**/*.md',
+      'BufReadPre ' .. vim.fn.expand '~/Documents/Obsidian_ROOT/Primary/**/*.md',
+      'BufNewFile ' .. vim.fn.expand '~/Documents/Obsidian_ROOT/Primary/**/*.md',
     },
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
+    templates = {
+      -- folder = 'Templates',
+      folder = 'Templates',
+      date_format = '%Y-%m-%d-%a',
+      time_format = '%H:%M',
+    },
+    ui = {
+      enable = true, -- set to false to disable all additional syntax features
+      update_debounce = 200, -- update delay after a text change (in milliseconds)
+      max_file_length = 5000, -- disable UI features for files with more than this many lines
+      -- Define how various check-boxes are displayed
+      checkboxes = {
+        -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
+        [' '] = { char = '󰄱', hl_group = 'ObsidianTodo' },
+        ['x'] = { char = '', hl_group = 'ObsidianDone' },
+        -- [">"] = { char = "", hl_group = "ObsidianRightArrow" },
+        -- ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
+        -- ["!"] = { char = "", hl_group = "ObsidianImportant" },
+        -- Replace the above with this if you don't have a patched font:
+        -- [" "] = { char = "☐", hl_group = "ObsidianTodo" },
+        -- ["x"] = { char = "✔", hl_group = "ObsidianDone" },
+
+        -- You can also add more custom ones...
+      },
+    },
     keys = {
-      { '<leader>nd', ':ObsidianToday<cr>', desc = 'obsidian [d]aily' },
-      { '<leader>nt', ':ObsidianToday 1<cr>', desc = 'obsidian [t]omorrow' },
-      { '<leader>ny', ':ObsidianToday -1<cr>', desc = 'obsidian [y]esterday' },
-      { '<leader>nb', ':ObsidianBacklinks<cr>', desc = 'obsidian [b]acklinks' },
-      { '<leader>nl', ':ObsidianLink<cr>', desc = 'obsidian [l]ink selection' },
-      { '<leader>nf', ':ObsidianFollowLink<cr>', desc = 'obsidian [f]ollow link' },
-      { '<leader>nn', ':ObsidianNew<cr>', desc = 'obsidian [n]ew' },
-      { '<leader>ns', ':ObsidianSearch<cr>', desc = 'obsidian [s]earch' },
-      { '<leader>no', ':ObsidianQuickSwitch<cr>', desc = 'obsidian [o]pen quickswitch' },
-      { '<leader>nO', ':ObsidianOpen<cr>', desc = 'obsidian [O]pen in app' },
+      { '<leader>;', ':ObsidianToggleCheckbox<cr>', desc = 'toggle checkboxes' },
+      -- { '<leader>nd', ':ObsidianToday<cr>', desc = 'obsidian [d]aily' },
+      -- { '<leader>nt', ':ObsidianToday 1<cr>', desc = 'obsidian [t]omorrow' },
+      -- { '<leader>ny', ':ObsidianToday -1<cr>', desc = 'obsidian [y]esterday' },
+      -- { '<leader>nb', ':ObsidianBacklinks<cr>', desc = 'obsidian [b]acklinks' },
+      -- { '<leader>nl', ':ObsidianLink<cr>', desc = 'obsidian [l]ink selection' },
+      -- { '<leader>nf', ':ObsidianFollowLink<cr>', desc = 'obsidian [f]ollow link' },
+      -- { '<leader>nn', ':ObsidianNew<cr>', desc = 'obsidian [n]ew' },
+      -- { '<leader>ns', ':ObsidianSearch<cr>', desc = 'obsidian [s]earch' },
+      -- { '<leader>no', ':ObsidianQuickSwitch<cr>', desc = 'obsidian [o]pen quickswitch' },
+      -- { '<leader>nO', ':ObsidianOpen<cr>', desc = 'obsidian [O]pen in app' },
     },
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require('obsidian').setup {
         workspaces = {
           {
-            name = 'notes',
-            path = '~/notes',
+            name = 'Primary',
+            path = '~/Documents/Obsidian_ROOT/Primary/',
           },
         },
         mappings = {
@@ -62,7 +89,7 @@ return {
             opts = { noremap = false, expr = true, buffer = true },
           },
           -- create and toggle checkboxes
-          ['<cr>'] = {
+          ['<c-;>'] = {
             action = function()
               local line = vim.api.nvim_get_current_line()
               if line:match '%s*- %[' then
@@ -96,5 +123,10 @@ return {
 
       vim.wo.conceallevel = 1
     end,
+  },
+  {
+    -- INFO: This mirrors navigation events in Neovim in the Obsidian app.
+    'oflisback/obsidian-bridge.nvim',
+    enabled = false,
   },
 }
