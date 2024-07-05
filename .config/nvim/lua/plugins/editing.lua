@@ -122,9 +122,10 @@ return {
     },
   },
 
+  -- plugins for getting around text faster. Going to try hop, flash, leap
   {
     'folke/flash.nvim',
-    enabled = false,
+    enabled = true,
     event = 'VeryLazy',
     opts = {
       modes = {
