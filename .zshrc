@@ -94,6 +94,9 @@ plugins=(
     zsh-vi-mode # custom; this might be messing up tmux
     zsh-autosuggestions
 )
+# Trying to get the autosuggest to use a better keybind than <right>
+# Tab is normal autocomplete, though, so is no good
+# bindkey '<tab>' autosuggest-accept
 
 # Start Tmux automatically
 # ZSH_TMUX_AUTOSTART="true"
@@ -253,3 +256,5 @@ export PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH=$PATH:/home/sasank/.spicetify
