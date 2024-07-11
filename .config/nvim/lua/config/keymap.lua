@@ -22,6 +22,17 @@ local cmap = function(key, effect)
   vim.keymap.set('c', key, effect, { silent = true, noremap = true })
 end
 
+-- TODO: This isn't quite working. I think it could be a tmux thing because <c-2> make the cursor take 2 presses of 'j' to move down one line
+-- global mark shortcuts
+vim.keymap.set('n', '<c-1>', 'mA') -- set a global mark with ctrl+1
+vim.keymap.set('n', '<s-1>', 'A') -- go to a global mark with shift+1
+vim.keymap.set('n', '<c-2>', 'mB')
+vim.keymap.set('n', '<s-2>', 'B')
+vim.keymap.set('n', '<c-3>', 'mC')
+vim.keymap.set('n', '<s-3>', 'C')
+vim.keymap.set('n', '<c-4>', 'mD')
+vim.keymap.set('n', '<s-4>', 'D')
+
 -- move in command line
 cmap('<C-a>', '<Home>')
 cmap('<C-e>', '<End>')
