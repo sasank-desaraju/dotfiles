@@ -344,7 +344,8 @@ wk.register({
   },
   g = {
     name = '[g]it',
-    g = { '<cmd>Neogit<cr>', 'Fu[g]itive' },
+    g = { '<cmd>Neogit<cr>', 'Neo[g]it' },
+    l = { '<cmd>LazyGit<cr>', '[l]azyGit' },
     s = { '<cmd> Telescope git_status <CR>', 'Git status' },
     x = { ':GitConflictRefresh<cr>', 'conflict (x)' },
     n = { ':Gitsigns<cr>', 'git sig[n]s' },
