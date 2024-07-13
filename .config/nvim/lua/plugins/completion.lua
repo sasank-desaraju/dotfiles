@@ -26,6 +26,7 @@ return {
       "rafamadriz/friendly-snippets",
       "onsails/lspkind-nvim",
       "jmbuhr/otter.nvim",
+      "zbirenbaum/copilot-cmp",
     },
     config = function()
       local cmp = require("cmp")
@@ -101,11 +102,31 @@ return {
         },
         autocomplete = true,
 
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            require("copilot_cmp.comparators").prioritize,
+
+            -- Below is the default comparitor list and order for nvim-cmp
+            cmp.config.compare.offset,
+            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.locality,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
+        },
+
         ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = lspkind.cmp_format({
             mode = "symbol",
             menu = {
+              copilot = "[copilot]",
               otter = "[🦦]",
               nvim_lsp = "[LSP]",
               luasnip = "[snip]",
@@ -122,6 +143,7 @@ return {
           }),
         },
         sources = {
+          { name = "copilot" },
           { name = "otter" }, -- for code chunks in quarto
           { name = "path" },
           { name = "nvim_lsp" },
@@ -155,14 +177,27 @@ return {
     end,
   },
 
+  { -- copilot-cmp; makes copilot an LSP completion source
+    "zbirenbaum/copilot-cmp",
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
+
   { -- gh copilot
     "zbirenbaum/copilot.lua",
-    enabled = false,
+    enabled = true,
+    cmd = "Copilot",
+    event = "InsertEnter",
     config = function()
       require("copilot").setup({
+        panel = {
+          enabled = false, -- recommended to disable by copilot-cmp
+          auto_refresh = false,
+        },
         suggestion = {
-          enabled = true,
-          auto_trigger = true,
+          enabled = false, -- recommended to disable by copilot-cmp
+          auto_trigger = false,
           debounce = 75,
           keymap = {
             accept = "<c-a>",
@@ -177,8 +212,12 @@ return {
             dismiss = "<C-]>",
           },
         },
-        panel = { enabled = false },
+        filetypes = {
+          yaml = false,
+          markdown = false,
+        },
       })
     end,
   },
 }
+-- let's see if this works; omg it does. This is so cool!!!
