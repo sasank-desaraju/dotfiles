@@ -122,6 +122,19 @@ return {
               '-L',
             },
           },
+          buffers = {
+            -- sort_lastused = true,
+            -- theme = 'dropdown',
+            -- previewer = true,
+            mappings = {
+              i = {
+                ['<c-d>'] = actions.delete_buffer,
+              },
+              n = {
+                ['<c-d>'] = actions.delete_buffer,
+              },
+            },
+          },
         },
         extensions = {
           ['ui-select'] = {
