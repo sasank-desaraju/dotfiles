@@ -69,8 +69,9 @@ return {
             select = true,
           }),
           ["<CR>"] = cmp.mapping.confirm({
-            select = true,
+            select = false,
           }),
+          -- ["<CR>"] = nil,
 
           ["<C-n>"] = cmp.mapping(function(fallback)
             if cmp.visible() then

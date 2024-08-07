@@ -204,6 +204,12 @@ alias cvim="NVIM_APPNAME=NVChad nvim"
 alias zsrc="source ~/.zshrc"
 #alias bsource="source ~/.bashrc"
 
+# Conda activate
+alias ca="conda activate"
+
+# Stop Ollama server (since it doesn't actually stop when I stop it)
+alias stop_ollama="systemctl stop ollama.service"
+
 # Add Slicer to PATH
 #export PATH="$HOME/Applications/Slicer-5.6.1-linux-amd64/Slicer:$PATH"
 export PATH="$HOME/Applications/Slicer-5.6.1-linux-amd64:$PATH"
@@ -217,6 +223,9 @@ export PATH="$HOME/Applications/Slicer-5.6.1-linux-amd64:$PATH"
 # alias neofetch="neofetch --ascii_colors 129 254 --colors 129 254 30 60 90 150 --ascii_distro Ubuntu_small"
 # neofetch
 # --ascii_distro Ubuntu_small       # to make the distro the small version. Might implement later...
+# Fastfetch
+# alias fastfetch="fastfetch --ascii_colors 129 254 --colors 129 254 30 60 90 150 --ascii_distro Ubuntu_small"
+# fastfetch
 
 # Add Mojo/Modular to PATH
 export MODULAR_HOME="/home/sasank/.modular"
