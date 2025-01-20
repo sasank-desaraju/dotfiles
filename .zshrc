@@ -18,13 +18,14 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="jispwoso"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "gnzh" "jispwoso")
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -105,6 +106,12 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 # Should I keep the below line?
 #tmux source ~/.config/tmux/tmux.conf
+if [ "$TMUX" ]; then
+  echo "Already in a tmux session"
+else
+  echo "No tmux detected; starting tmux"
+  tmux
+fi
 
 # User configuration
 
@@ -159,7 +166,7 @@ alias sni="sudo nala install"
 
 # Alias ls to use exa instead of normal ls
 alias ls="exa"
-alias ll="exa -l"
+alias ll="exa -la"
 alias lt="exa -lasnew"
 alias la="exa -la"
 alias zz="z .."
@@ -267,3 +274,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH=$PATH:/home/sasank/.spicetify
+
+export PATH="/home/sasank/.pixi/bin:$PATH"
+eval "$(pixi completion --shell zsh)"
+
+# # Function to check if we are in Pixi shell
+# function pixi_prompt_indicator() {
+#     if [[ "$(pixi env | grep '^Environment')" =~ 'active' ]]; then
+#         echo "%F{yellow}[pixi]%f "
+#     fi
+# }
+#
+# # Add the indicator to the prompt
+# PROMPT='$(pixi_prompt_indicator)'"$PROMPT"
