@@ -192,3 +192,16 @@ case ":$PATH:" in
 esac
 
 # <<< juliaup initialize <<<
+
+export PATH="/home/sasank/.pixi/bin:$PATH"
+eval "$(pixi completion --shell bash)"
+
+# Function to check if we are in Pixi shell
+function pixi_prompt_indicator() {
+    if [[ "$(pixi env | grep '^Environment')" =~ 'active' ]]; then
+        echo "%F{yellow}[pixi]%f "
+    fi
+}
+
+# Add the indicator to the prompt
+PROMPT='$(pixi_prompt_indicator)'"$PROMPT"
