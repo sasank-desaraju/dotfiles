@@ -162,6 +162,7 @@ alias sai="sudo apt install"
 # Using nala instead of apt
 alias snd="sudo nala update"
 alias sng="sudo nala upgrade"
+alias sngy="sudo nala upgrade -y"
 alias sni="sudo nala install"
 
 # Alias ls to use exa instead of normal ls
@@ -278,12 +279,4 @@ export PATH=$PATH:/home/sasank/.spicetify
 export PATH="/home/sasank/.pixi/bin:$PATH"
 eval "$(pixi completion --shell zsh)"
 
-# # Function to check if we are in Pixi shell
-# function pixi_prompt_indicator() {
-#     if [[ "$(pixi env | grep '^Environment')" =~ 'active' ]]; then
-#         echo "%F{yellow}[pixi]%f "
-#     fi
-# }
-#
-# # Add the indicator to the prompt
-# PROMPT='$(pixi_prompt_indicator)'"$PROMPT"
+[ -f ~/.zshenv ] && source ~/.zshenv
