@@ -97,7 +97,7 @@ plugins=(
 )
 # Trying to get the autosuggest to use a better keybind than <right>
 # Tab is normal autocomplete, though, so is no good
-# bindkey '<tab>' autosuggest-accept
+bindkey '<tab>' autosuggest-accept
 
 # Start Tmux automatically
 # ZSH_TMUX_AUTOSTART="true"
@@ -165,11 +165,11 @@ alias sng="sudo nala upgrade"
 alias sngy="sudo nala upgrade -y"
 alias sni="sudo nala install"
 
-# Alias ls to use exa instead of normal ls
-alias ls="exa"
-alias ll="exa -la"
-alias lt="exa -lasnew"
-alias la="exa -la"
+# Alias ls to use eza instead of normal ls
+alias ls="eza"
+alias ll="eza -la"
+alias lt="eza -lasnew"
+alias la="eza -la"
 alias zz="z .."
 
 alias open="xdg-open"
@@ -292,5 +292,5 @@ if [[ -n "$BUFFER" ]]; then
 fi
 }
 zle -N _sgpt_zsh
-bindkey ^l _sgpt_zsh    # This is the keybind for the completion
+bindkey ^o _sgpt_zsh    # This is the keybind for the completion
 # Shell-GPT integration ZSH v0.2
