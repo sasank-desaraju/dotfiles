@@ -160,7 +160,7 @@ alias sad="sudo apt update"
 alias sag="sudo apt upgrade"
 alias sai="sudo apt install"
 # Using nala instead of apt
-alias snd="sudo nala update"
+alias snd="sudo nala update && nala list --upgradable"
 alias sng="sudo nala upgrade"
 alias sngy="sudo nala upgrade -y"
 alias sni="sudo nala install"
@@ -220,7 +220,8 @@ alias stop_ollama="systemctl stop ollama.service"
 
 # Add Slicer to PATH
 #export PATH="$HOME/Applications/Slicer-5.6.1-linux-amd64/Slicer:$PATH"
-export PATH="$HOME/Applications/Slicer-5.6.1-linux-amd64:$PATH"
+export PATH="$HOME/Applications/Slicer-5.8.0-linux-amd64:$PATH"
+alias slicer="$HOME/Applications/Slicer-5.8.0-linux-amd64/Slicer > log-client 2>&1 &"
 
 # Run tmux
 # if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
