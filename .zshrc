@@ -177,6 +177,8 @@ alias open="xdg-open"
 eval "$(zoxide init zsh)"
 
 
+# Alias git status for convenience
+alias gis="git status"
 
 # alias the shapeworks studio command to shapworks
 alias shapeworks="/home/sasank/ShapeWorks-v6.3.0-linux/bin/ShapeWorksStudio"
