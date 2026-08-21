@@ -106,11 +106,12 @@ bindkey '<tab>' autosuggest-accept
 source $ZSH/oh-my-zsh.sh
 # Should I keep the below line?
 #tmux source ~/.config/tmux/tmux.conf
-if [ "$TMUX" ]; then
-  echo "Already in a tmux session"
-else
-  echo "No tmux detected; starting tmux"
-  tmux
+# Auto-start herdr (replaced the old tmux autostart on 2026-07-30).
+# Guards: interactive shells only; skip inside a herdr pane ($HERDR_ENV) or a
+# tmux session; skip where herdr isn't installed (e.g. HPG).
+if [[ -o interactive ]] && [[ -z "$HERDR_ENV" ]] && [[ -z "$TMUX" ]] \
+   && command -v herdr >/dev/null 2>&1; then
+  herdr
 fi
 
 # User configuration
@@ -140,14 +141,21 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
-else
-  export EDITOR='vim'
-fi
+export EDITOR='nvim'
 
 # Enable Vi mode in zsh
 bindkey -v
+
+# Rich inputs: pop the current command line into Neovim for full editing.
+# Use $VISUAL so this always opens nvim regardless of the $EDITOR logic above.
+export VISUAL='nvim'
+autoload -U edit-command-line
+zle -N edit-command-line
+# Standard binding (works in insert and command mode)
+bindkey '^x^e' edit-command-line          # Ctrl-X Ctrl-E
+bindkey -M vicmd '^x^e' edit-command-line
+# Vi-mode bonus: press `v` in normal mode to open the line in Neovim
+bindkey -M vicmd 'v' edit-command-line
 
 # I don't really use these any more in favor of `ssh hpg` with a custom config
 # Alias ssh-ing into HiPerGator
@@ -194,9 +202,9 @@ export PATH="$HOME/.config/emacs/bin:$PATH"
 alias emacs="emacsclient -c -a 'emacs'"
 
 # *** VIM/NEOVIM
-# alias nvim to nv
-alias nv="~/Applications/nvim.appimage"
-alias nvim="~/Applications/nvim.appimage"
+# nvim is on PATH via ~/.local/bin/nvim, which points to the extracted
+# ~/Applications/squashfs-root/AppRun launcher. This avoids AppImage/FUSE issues.
+alias nv="nvim"
 
 # Alias LazyVim
 alias lvim="NVIM_APPNAME=LazyNvim nvim"
@@ -297,3 +305,12 @@ fi
 zle -N _sgpt_zsh
 bindkey ^o _sgpt_zsh    # This is the keybind for the completion
 # Shell-GPT integration ZSH v0.2
+
+# Yazi shell wrapper: open Yazi and cd to the final directory on quit.
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	command rm -f -- "$tmp"
+}
