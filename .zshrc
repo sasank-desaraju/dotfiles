@@ -290,7 +290,10 @@ export PATH=$PATH:/home/sasank/.spicetify
 export PATH="/home/sasank/.pixi/bin:$PATH"
 eval "$(pixi completion --shell zsh)"
 
-[ -f ~/.zshenv ] && source ~/.zshenv
+# ~/.env replaced ~/.zshenv so bash can share it. Note zsh no longer
+# auto-loads this (that was .zshenv's special behavior) -- the explicit
+# source below is now what actually loads it.
+[ -f ~/.env ] && source ~/.env
 
 # Shell-GPT integration ZSH v0.2
 _sgpt_zsh() {

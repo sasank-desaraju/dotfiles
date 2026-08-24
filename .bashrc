@@ -2,8 +2,30 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# Add Doom to the PATH
-export PATH="$HOME/.emacs.d/bin:$PATH"
+# --- Omarchy environment bootstrap (sets OMARCHY_PATH + PATH) -------------
+# Must run above the interactive guard: non-interactive shells need it too.
+# Guarded, so this is a silent no-op on non-Omarchy machines.
+[[ -r /usr/share/omarchy/default/bash/env-bootstrap ]] &&
+  source /usr/share/omarchy/default/bash/env-bootstrap
+
+# --- ssh-agent -------------------------------------------------------------
+# Arch/Omarchy: point at the socket-activated systemd user agent
+# (systemctl --user enable --now ssh-agent.socket). Above the interactive
+# guard so non-interactive git/rsync see it too.
+# Guarded twice, so this is a silent no-op on Pop!_OS, where GNOME Keyring
+# already exports its own SSH_AUTH_SOCK.
+if [[ -z "$SSH_AUTH_SOCK" && -S "${XDG_RUNTIME_DIR:-/run/user/$UID}/ssh-agent.socket" ]]; then
+  export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/$UID}/ssh-agent.socket"
+fi
+
+# --- Shared environment / secrets ------------------------------------------
+# ~/.env holds API keys and other exports. Shell-neutral (plain POSIX), mode
+# 0600, NOT tracked in ~/dotfiles. Sourced by both .bashrc and .zshrc so there
+# is one source of truth across bash/zsh and Omarchy/Pop.
+# Placed above the interactive guard to match Omarchy's own bashrc layout.
+# Note: a bare `bash -c ...` does not read .bashrc at all, so it will not
+# see these -- but anything launched FROM a terminal inherits them.
+[ -f ~/.env ] && . ~/.env
 
 # If not running interactively, don't do anything
 case $- in
@@ -30,13 +52,16 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
+# Debian-isms from Ubuntu's stock .bashrc. Both are inert on Arch: /usr/bin/lesspipe
+# is Debian's wrapper name (Arch ships lesspipe.sh) and /etc/debian_chroot never
+# exists here. Commented rather than deleted -- still correct on a Debian box.
+# NOTE: $debian_chroot is referenced by the PS1 block below; it stays harmlessly
+# empty when this is off.
+# [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+#
+# if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+#     debian_chroot=$(cat /etc/debian_chroot)
+# fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -144,8 +169,12 @@ fi
 # <<< conda initialize <<<
 
 alias op='xdg-open'
-# neofetch
-neofetch --ascii_colors 129 254
+# Startup fetch: fastfetch on Omarchy/Arch, neofetch elsewhere, silent if neither.
+if command -v fastfetch &> /dev/null; then
+  fastfetch
+elif command -v neofetch &> /dev/null; then
+  neofetch --ascii_colors 129 254
+fi
 
 # alias nvim to nv
 alias nv="nvim"
@@ -153,24 +182,17 @@ alias nv="nvim"
 # alias the shapeworks studio command to shapworks
 alias shapeworks="/home/sasank/ShapeWorks-v6.3.0-linux/bin/ShapeWorksStudio"
 
-# Add TeX Live to PATH
-export PATH="/usr/local/texlive/2022/bin/x86_64-linux:$PATH"
-export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
-
-# Alias Emacs
-alias emacs="emacsclient -c -a 'emacs'"
-
 # Alias ssh-ing into HiPerGator
 alias sshp="ssh sasank.desaraju@hpg.rc.ufl.edu"
 
 # Alias sftp-ing into HiPerGator
 alias sfhp="sftp sasank.desaraju@hpg.rc.ufl.edu"
 
-# Alias apt update
-alias sad="sudo apt update"
-
-# Alias apt upgrade
-alias sag="sudo apt upgrade"
+# Debian-only: no apt on Arch/Omarchy. Left commented rather than deleted so
+# they still work if this .bashrc is used on a Debian/Ubuntu box.
+# Omarchy equivalents: `omarchy update`, or `omarchy pkg add <pkg>`.
+# alias sad="sudo apt update"
+# alias sag="sudo apt upgrade"
 
 # Adding NVIDIA CUDA Toolkit to PATH
 # export PATH=/usr/local/cuda-11.5/bin${PATH:+:${PATH}}
@@ -205,3 +227,41 @@ function pixi_prompt_indicator() {
 
 # Add the indicator to the prompt
 PROMPT='$(pixi_prompt_indicator)'"$PROMPT"
+
+# --- Omarchy shell integration -------------------------------------------
+# Sourced LAST on purpose: omarchy's starship prompt and aliases must win
+# over the Ubuntu-era PS1 and defaults set earlier in this file.
+# Guarded, so this is a silent no-op on non-Omarchy machines.
+if [[ -r "${OMARCHY_PATH:-/usr/share/omarchy}/default/bash/rc" ]]; then
+  source "${OMARCHY_PATH:-/usr/share/omarchy}/default/bash/rc"
+
+  # zoxide: `z` and `zi` come from `zoxide init bash`, run by omarchy's init.
+  # Omarchy also does `alias cd=zd`; drop it so plain `cd` stays plain.
+  # To get the zoxide-fallback cd back, delete the next line.
+  unalias cd 2>/dev/null
+
+  # Put your own overrides BELOW this line so they beat omarchy's.
+fi
+
+# --- Ported from .zshrc ----------------------------------------------------
+alias zz="z .."
+
+# Yazi shell wrapper: open Yazi and cd to the final directory on quit.
+y() {
+  local tmp cwd
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  command yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd <"$tmp"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+  command rm -f -- "$tmp"
+}
+
+# Auto-start herdr (ported from .zshrc, which replaced tmux autostart 2026-07-30).
+# Guards: interactive shells only; must be on a real tty (so `bash -ic ...` from
+# scripts and agents doesn't spawn one); skip inside a herdr pane ($HERDR_ENV)
+# or a tmux session; skip where herdr isn't installed (e.g. HPG).
+# Kept LAST so the shell is fully configured before herdr takes over.
+if [[ $- == *i* ]] && [[ -t 1 ]] && [[ -z "$HERDR_ENV" ]] && [[ -z "$TMUX" ]] \
+   && command -v herdr >/dev/null 2>&1; then
+  herdr
+fi
