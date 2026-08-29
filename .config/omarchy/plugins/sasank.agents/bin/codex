@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -euo pipefail
+
+real_codex="$(mise which codex 2>/dev/null)"
+[[ -x $real_codex ]] || {
+  echo "codex compatibility shim: could not locate the real Codex binary" >&2
+  exit 127
+}
+
+args=()
+expect_approval_value=false
+for arg in "$@"; do
+  if [[ $expect_approval_value == true ]]; then
+    [[ $arg == "untrusted" ]] && arg="never"
+    expect_approval_value=false
+  elif [[ $arg == "-a" || $arg == "--ask-for-approval" ]]; then
+    expect_approval_value=true
+  fi
+  args+=("$arg")
+done
+
+exec "$real_codex" "${args[@]}"

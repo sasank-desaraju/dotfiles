@@ -153,6 +153,7 @@ BarWidget {
     id: button
     anchors.fill: parent
     bar: root.bar
+    fontSize: Style.font.body * 1.4
     text: root.vertical ? "" : root.displayText
     labelVisible: !root.vertical
     hasVisualContent: root.vertical ? root.verticalLines.length > 0 : text !== ""

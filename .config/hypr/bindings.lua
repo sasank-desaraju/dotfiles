@@ -92,6 +92,11 @@ o.bind("SUPER + CTRL + ALT + J", "Toggle window split", hl.dsp.layout("togglespl
 hl.unbind("SUPER + SLASH") -- was: Monitor scaling up
 hl.unbind("SUPER + ALT + SLASH") -- was: Monitor scaling down
 
+-- Use keyboard-first Yazi as the primary file manager.
+-- SUPER+ALT+SHIFT+F keeps Omarchy's Nautilus-in-current-directory fallback.
+hl.unbind("SUPER + SHIFT + F") -- was: Nautilus file manager
+o.bind("SUPER + SHIFT + F", "File manager (Yazi)", { tui = "yazi" })
+
 -- Signal's shared Pop!_OS profile stores its database key in GNOME Keyring.
 hl.unbind("SUPER + SHIFT + G") -- was: Signal via Omarchy's generic launcher
 o.bind("SUPER + SHIFT + G", "Signal", { launch = "/home/sasank/.local/bin/signal-gnome-keyring", focus = "signal" })

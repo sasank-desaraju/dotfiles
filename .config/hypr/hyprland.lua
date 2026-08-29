@@ -28,4 +28,16 @@ require("default.hypr.toggles")
 -- Add any other personal Hyprland configuration below.
 -- Treat ZSA Keymapp like a normal tiled window rather than a floating overlay.
 o.window("keymapp", { tile = true, pin = false })
+
+-- Keep Ghostty fully opaque, including when it is not focused.
+o.window("com.mitchellh.ghostty", {
+  tag = "-default-opacity",
+  opacity = "1.0 override 1.0 override 1.0 override",
+})
+
+-- Keep native Zoom and every Zoom web-app route fully opaque.
+o.window("^(zoom|.+-app\\.zoom\\.us__.*)$", {
+  tag = "-default-opacity",
+  opacity = "1.0 override 1.0 override 1.0 override",
+})
 -- o.window("qemu", { workspace = "5" })

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -euo pipefail
+
+plugin_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+# Omarchy 4.0.0's packaged Codex collector passes the removed
+# `-a untrusted` value. Put our compatibility shim first only for this
+# background usage refresh, leaving normal `codex` invocations untouched.
+exec env "PATH=$plugin_dir/bin:${PATH:-}" \
+  /usr/share/omarchy/bin/omarchy-agent-usage-update "$@"
