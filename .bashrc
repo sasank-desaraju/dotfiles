@@ -27,6 +27,13 @@ fi
 # see these -- but anything launched FROM a terminal inherits them.
 [ -f ~/.env ] && . ~/.env
 
+# --- cua-driver native Wayland (Hyprland) ---------------------------------
+# Without this, CUA only sees XWayland windows and misses Chromium/myIRB.
+# Above the interactive guard so non-interactive bash that sources this
+# file also gets it. GUI apps started from Hyprland still need hl.env /
+# environment.d (already set).
+export CUA_DRIVER_RS_ENABLE_WAYLAND=1
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -255,13 +262,3 @@ y() {
   [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
   command rm -f -- "$tmp"
 }
-
-# Auto-start herdr (ported from .zshrc, which replaced tmux autostart 2026-07-30).
-# Guards: interactive shells only; must be on a real tty (so `bash -ic ...` from
-# scripts and agents doesn't spawn one); skip inside a herdr pane ($HERDR_ENV)
-# or a tmux session; skip where herdr isn't installed (e.g. HPG).
-# Kept LAST so the shell is fully configured before herdr takes over.
-if [[ $- == *i* ]] && [[ -t 1 ]] && [[ -z "$HERDR_ENV" ]] && [[ -z "$TMUX" ]] \
-   && command -v herdr >/dev/null 2>&1; then
-  herdr
-fi

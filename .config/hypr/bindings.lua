@@ -92,6 +92,12 @@ o.bind("SUPER + CTRL + ALT + J", "Toggle window split", hl.dsp.layout("togglespl
 hl.unbind("SUPER + SLASH") -- was: Monitor scaling up
 hl.unbind("SUPER + ALT + SLASH") -- was: Monitor scaling down
 
+-- Start Herdr only for an explicitly launched terminal, not every Bash shell.
+hl.unbind("SUPER + RETURN") -- was: Plain Omarchy terminal
+o.bind("SUPER + RETURN", "Herdr", { omarchy = "terminal-herdr" })
+hl.unbind("SUPER + CTRL + RETURN") -- was: Herdr
+o.bind("SUPER + CTRL + RETURN", "Terminal", { omarchy = "terminal" })
+
 -- Use keyboard-first Yazi as the primary file manager.
 -- SUPER+ALT+SHIFT+F keeps Omarchy's Nautilus-in-current-directory fallback.
 hl.unbind("SUPER + SHIFT + F") -- was: Nautilus file manager
