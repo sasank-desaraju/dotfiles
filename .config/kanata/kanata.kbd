@@ -1,6 +1,7 @@
 ;; Home-row mods for the Toshiba built-in keyboard.
 ;; Tap = the letter. Hold past 200ms = the modifier until you release.
 ;; Combos: f+j = Enter, a+; = Escape.
+;; Hold Caps Lock: i/j/k/l become up/left/down/right.
 
 (defcfg
   linux-dev-names-include ("AT Translated Set 2 keyboard")
@@ -11,7 +12,8 @@
 )
 
 (defsrc
-  a s d f    j k l ;
+  caps
+  a s d f  i j k l ;
 )
 
 (defvar
@@ -21,19 +23,25 @@
 )
 
 (defalias
-  a-alt   (tap-hold $tap-ms $hold-ms a lalt)
-  s-super (tap-hold $tap-ms $hold-ms s lmet)
-  d-ctrl  (tap-hold $tap-ms $hold-ms d lctl)
-  f-shift (tap-hold $tap-ms $hold-ms f lsft)
-  j-shift (tap-hold $tap-ms $hold-ms j rsft)
-  k-ctrl  (tap-hold $tap-ms $hold-ms k rctl)
-  l-super (tap-hold $tap-ms $hold-ms l rmet)
-  ;-alt   (tap-hold $tap-ms $hold-ms ; ralt)
+  caps-nav (layer-while-held arrows)
+  a-alt    (tap-hold $tap-ms $hold-ms a lalt)
+  s-super  (tap-hold $tap-ms $hold-ms s lmet)
+  d-ctrl   (tap-hold $tap-ms $hold-ms d lctl)
+  f-shift  (tap-hold $tap-ms $hold-ms f lsft)
+  j-shift  (tap-hold $tap-ms $hold-ms j rsft)
+  k-ctrl   (tap-hold $tap-ms $hold-ms k rctl)
+  l-super  (tap-hold $tap-ms $hold-ms l rmet)
+  ;-alt    (tap-hold $tap-ms $hold-ms ; ralt)
 )
 
 (deflayer base
-  @a-alt @s-super @d-ctrl @f-shift
-  @j-shift @k-ctrl @l-super @;-alt
+  @caps-nav
+  @a-alt @s-super @d-ctrl @f-shift  i @j-shift @k-ctrl @l-super @;-alt
+)
+
+(deflayer arrows
+  _
+  _ _ _ _  up left down right _
 )
 
 ;; Chords run before tap-hold, so both keys down together never become Shift/Alt.
